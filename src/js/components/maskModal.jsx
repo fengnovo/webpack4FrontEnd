@@ -10,7 +10,9 @@ class MaskModal extends React.Component {
             showModal: props.showModal || false,
             container: props.showModal || null
         };
-
+        this.close = () => {
+            props.onChangeModal();
+        };
         this._bind.apply(this, ['close', 'open', 'enter']);
     }
 
@@ -42,10 +44,10 @@ class MaskModal extends React.Component {
         return (
             <Modal className='mask-model' show={this.state.showModal} onHide={this.close}>
                 <Modal.Header closeButton>
-                    <Modal.Title>能居中显示吗</Modal.Title>
+                    <Modal.Title>提示</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <p>Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus auctor fringilla.</p>
+                    <p>请登陆！</p>
                 </Modal.Body>
                 <Modal.Footer>
                     <Button onClick={this.close}>取消</Button>

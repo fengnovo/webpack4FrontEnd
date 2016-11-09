@@ -6370,7 +6370,7 @@ textarea, input {
   height: 40px;
   width: 100%;
   line-height: 40px;
-  background: #3C8DBC; }
+  background: #337ab7; }
   .header .new, .header .login {
     color: #fff;
     text-align: right;
@@ -6384,7 +6384,8 @@ textarea, input {
     font-size: 14px;
     border-bottom: solid 1px #dbdbdb; }
     .navigate li a {
-      border-radius: 0; }
+      border-radius: 0;
+      background-color: #337ab7 !important; }
   .navigate > li + li {
     margin: 0;
     border-top: solid 1px #fff; }
@@ -6403,10 +6404,12 @@ textarea, input {
   .list-filter .form-control {
     width: 128px; }
   .list-filter button {
-    width: 88px; }
+    width: 88px;
+    background-color: #337ab7 !important;
+    border-color: #337ab7 !important; }
 
 .footer {
-  height: 6px;
+  height: 36px;
   line-height: 36px;
   text-align: center;
   color: #999; }

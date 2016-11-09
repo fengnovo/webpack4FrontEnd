@@ -27241,7 +27241,7 @@
 	        _this2.option = {
 	            page: 1
 	        };
-	        _this2._bind.apply(_this2, ['onRowClick', 'onRowSelect', 'onSelectAll', 'getTableData']);
+	        _this2._bind.apply(_this2, ['onRowClick', 'onRowSelect', 'onSelectAll', 'getTableData', 'onPageChange', 'onChangeModal']);
 	        return _this2;
 	    }
 
@@ -27262,7 +27262,6 @@
 	        key: 'onRowClick',
 	        value: function onRowClick(row) {
 	            window.open('#/detail/' + row.id);
-	            // window.location.href = `#/infoDetail/${row.id}`;
 	        }
 	    }, {
 	        key: 'onRowSelect',
@@ -27295,6 +27294,14 @@
 	        value: function onPageChange(page, sizePerPage) {
 	            var opt = Object.assign(this.option, { page: page });
 	            this.getTableData(opt);
+	        }
+	    }, {
+	        key: 'onChangeModal',
+	        value: function onChangeModal() {
+
+	            this.setState({
+	                showModal: !this.state.showModal
+	            });
 	        }
 	    }, {
 	        key: 'componentDidMount',
@@ -27330,7 +27337,7 @@
 	            return _react2.default.createElement(
 	                'div',
 	                { className: 'info-manage-page page-wrap', ref: 'list' },
-	                _react2.default.createElement(_header2.default, { colName: 'list' }),
+	                _react2.default.createElement(_header2.default, { colName: 'list', onChangeModal: this.onChangeModal }),
 	                _react2.default.createElement(
 	                    'div',
 	                    { className: 'info-manage-body page-body' },
@@ -27346,7 +27353,8 @@
 	                        _react2.default.createElement(_table2.default, { tableConfig: tableConfig, tableFun: tableFun, tableData: tableData }),
 	                        _react2.default.createElement(_footer2.default, null)
 	                    )
-	                )
+	                ),
+	                _react2.default.createElement(_maskModal2.default, { showModal: this.state.showModal, onChangeModal: this.onChangeModal })
 	            );
 	        }
 	    }]);
@@ -42445,12 +42453,12 @@
 	        _react2.default.createElement("div", { className: "logo" }),
 	        _react2.default.createElement(
 	            "a",
-	            { className: "login", href: "javascript:;", onClick: null },
+	            { className: "login", href: "javascript:void(0);", onClick: props.onChangeModal },
 	            "登陆"
 	        ),
 	        'list' === props.colName ? _react2.default.createElement(
 	            "a",
-	            { className: "new", href: "#new", onClick: props.new },
+	            { className: "new", href: "javascript:void(0);", onClick: props.onChangeModal },
 	            "发布话题"
 	        ) : null
 	    );
@@ -93322,7 +93330,9 @@
 	            showModal: props.showModal || false,
 	            container: props.showModal || null
 	        };
-
+	        _this.close = function () {
+	            props.onChangeModal();
+	        };
 	        _this._bind.apply(_this, ['close', 'open', 'enter']);
 	        return _this;
 	    }
@@ -93373,7 +93383,7 @@
 	                    _react2.default.createElement(
 	                        _reactBootstrap.Modal.Title,
 	                        null,
-	                        '能居中显示吗'
+	                        '提示'
 	                    )
 	                ),
 	                _react2.default.createElement(
@@ -93382,7 +93392,7 @@
 	                    _react2.default.createElement(
 	                        'p',
 	                        null,
-	                        'Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus auctor fringilla.'
+	                        '请登陆！'
 	                    )
 	                ),
 	                _react2.default.createElement(

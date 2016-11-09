@@ -23,7 +23,7 @@ class List extends React.Component {
         this.option = {
             page: 1
         };
-        this._bind.apply(this, ['onRowClick', 'onRowSelect', 'onSelectAll', 'getTableData']);
+        this._bind.apply(this, ['onRowClick', 'onRowSelect', 'onSelectAll', 'getTableData','onPageChange','onChangeModal']);
     }
 
     _bind (...methods) {
@@ -32,7 +32,6 @@ class List extends React.Component {
 
     onRowClick (row) {
         window.open(`#/detail/${row.id}`);
-        // window.location.href = `#/infoDetail/${row.id}`;
     }
 
     onRowSelect (row, isSelected) {
@@ -61,6 +60,13 @@ class List extends React.Component {
     onPageChange (page, sizePerPage) {
         var opt = Object.assign(this.option, {page});
         this.getTableData(opt);
+    }
+
+    onChangeModal () {
+
+        this.setState({
+            showModal: !this.state.showModal
+        });
     }
 
     componentDidMount() {
@@ -101,7 +107,7 @@ class List extends React.Component {
 
         return (
             <div className="info-manage-page page-wrap" ref="list">
-                <Header colName='list'/>
+                <Header colName='list' onChangeModal={this.onChangeModal} /> 
                 <div className='info-manage-body page-body'> 
                     <div className='body-left'>
                         <Navigate colName='list'/>
@@ -112,6 +118,7 @@ class List extends React.Component {
                         <Footer />
                     </div>
                 </div>
+                <MaskModal showModal={this.state.showModal} onChangeModal={this.onChangeModal}/>
             </div>
         ); 
     }
