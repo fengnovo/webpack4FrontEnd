@@ -27235,11 +27235,13 @@
 
 	        var _this2 = _possibleConstructorReturn(this, (List.__proto__ || Object.getPrototypeOf(List)).call(this, props));
 
-	        _this2.state = {};
+	        _this2.state = {
+	            showModal: true
+	        };
 	        _this2.option = {
 	            page: 1
 	        };
-	        _this2._bind.apply(_this2, ['onRowClick', 'onRowSelect', 'onSelectAll', 'getTableData', 'onPageChange', 'doDelete', 'doFirstCheck', 'doRecheck']);
+	        _this2._bind.apply(_this2, ['onRowClick', 'onRowSelect', 'onSelectAll', 'getTableData']);
 	        return _this2;
 	    }
 
@@ -27295,21 +27297,6 @@
 	            this.getTableData(opt);
 	        }
 	    }, {
-	        key: 'doDelete',
-	        value: function doDelete() {
-	            console.log('infoManage doDelete');
-	        }
-	    }, {
-	        key: 'doFirstCheck',
-	        value: function doFirstCheck() {
-	            console.log('infoManage doFirstCheck');
-	        }
-	    }, {
-	        key: 'doRecheck',
-	        value: function doRecheck() {
-	            console.log('infoManage doRecheck');
-	        }
-	    }, {
 	        key: 'componentDidMount',
 	        value: function componentDidMount() {}
 	    }, {
@@ -27324,7 +27311,7 @@
 	                doRecheck: this.doRecheck
 	            };
 	            var tableConfig = {
-	                "column": [{ "field": "id", "isKey": true, "name": "发表人" }, { "field": "title", "isKey": false, "name": "热度" }, { "field": "statusName", "isKey": false, "name": "标签" }, { "field": "readCnt", "isKey": false, "name": "标题" }, { "field": "utime", "isKey": false, "name": "时间" }],
+	                "column": [{ "field": "id", "isKey": true, "name": "id" }, { "field": "loginname", "isKey": false, "name": "发表人" }, { "field": "title", "isKey": false, "name": "标题" }, { "field": "create_at", "isKey": false, "name": "时间" }],
 	                "checkboxMode": true
 	            };
 	            // globalConfig.tableConfig.infoTable;
@@ -27342,20 +27329,20 @@
 
 	            return _react2.default.createElement(
 	                'div',
-	                { className: 'info-manage-page page-wrap', ref: 'infoManage' },
-	                _react2.default.createElement(_header2.default, { colName: 'infoManage' }),
+	                { className: 'info-manage-page page-wrap', ref: 'list' },
+	                _react2.default.createElement(_header2.default, { colName: 'list' }),
 	                _react2.default.createElement(
 	                    'div',
 	                    { className: 'info-manage-body page-body' },
 	                    _react2.default.createElement(
 	                        'div',
 	                        { className: 'body-left' },
-	                        _react2.default.createElement(_navigate2.default, { colName: 'infoManage' })
+	                        _react2.default.createElement(_navigate2.default, { colName: 'list' })
 	                    ),
 	                    _react2.default.createElement(
 	                        'div',
 	                        { className: 'body-right' },
-	                        _react2.default.createElement(_listFilter2.default, { colName: 'infoManage', getTableData: this.getTableData }),
+	                        _react2.default.createElement(_listFilter2.default, { colName: 'list', getTableData: this.getTableData }),
 	                        _react2.default.createElement(_table2.default, { tableConfig: tableConfig, tableFun: tableFun, tableData: tableData }),
 	                        _react2.default.createElement(_footer2.default, null)
 	                    )
@@ -42461,9 +42448,9 @@
 	            { className: "login", href: "javascript:;", onClick: null },
 	            "登陆"
 	        ),
-	        'infoManage' === props.colName ? _react2.default.createElement(
+	        'list' === props.colName ? _react2.default.createElement(
 	            "a",
-	            { className: "new", href: "#newInfo", onClick: props.new },
+	            { className: "new", href: "#new", onClick: props.new },
 	            "发布话题"
 	        ) : null
 	    );
@@ -61477,7 +61464,7 @@
 	                form;
 
 	            switch (switchLabel) {
-	                case 'infoManage':
+	                case 'list':
 	                    form = _react2.default.createElement(
 	                        _reactBootstrap.Form,
 	                        { componentClass: 'fieldset', inline: true, className: 'list-filter', ref: 'listFilter' },
@@ -61509,7 +61496,7 @@
 	                    );
 	                    break;
 	                default:
-	                    form = 'listFilter';
+	                    form = null;
 	                    break;
 	            }
 
@@ -69360,7 +69347,10 @@
 	            var _props$tableData$tota = _props$tableData.total;
 	            var total = _props$tableData$tota === undefined ? 0 : _props$tableData$tota;
 
-
+	            list.length > 0 && list.map(function (item, i) {
+	                item.loginname = item.author.loginname;
+	            });
+	            console.log(list);
 	            var tableHeight = window.innerHeight - 40 - 113 - 36 - 75; // 40 header, 113 top, 36 bottom, 75 pagination
 	            tableHeight = Math.min(612, tableHeight); // 612, 20条数据的高度。取二者较小值，用于滚动
 

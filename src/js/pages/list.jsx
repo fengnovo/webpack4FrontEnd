@@ -17,12 +17,13 @@ class List extends React.Component {
     constructor(props){
         super(props);
     
-        this.state = {    
+        this.state = {   
+            showModal: true 
         };
         this.option = {
             page: 1
         };
-        this._bind.apply(this, ['onRowClick', 'onRowSelect', 'onSelectAll', 'getTableData', 'onPageChange', 'doDelete', 'doFirstCheck', 'doRecheck']);
+        this._bind.apply(this, ['onRowClick', 'onRowSelect', 'onSelectAll', 'getTableData']);
     }
 
     _bind (...methods) {
@@ -62,18 +63,6 @@ class List extends React.Component {
         this.getTableData(opt);
     }
 
-    doDelete () {
-        console.log('infoManage doDelete');
-    }
-
-    doFirstCheck () {
-        console.log('infoManage doFirstCheck');
-    }
-
-    doRecheck () {
-        console.log('infoManage doRecheck');
-    }
-
     componentDidMount() {
 
     }
@@ -90,11 +79,10 @@ class List extends React.Component {
         };
         var tableConfig =  {
             "column": [
-                {"field": "id", "isKey": true, "name": "发表人"},
-                {"field": "title", "isKey": false, "name": "热度"},
-                {"field": "statusName", "isKey": false, "name": "标签"},
-                {"field": "readCnt", "isKey": false, "name": "标题"},
-                {"field": "utime", "isKey": false, "name": "时间"}
+                {"field": "id", "isKey": true, "name": "id"},
+                {"field": "loginname", "isKey": false, "name": "发表人"},
+                {"field": "title", "isKey": false, "name": "标题"},
+                {"field": "create_at", "isKey": false, "name": "时间"}
             ],
             "checkboxMode": true
         };
@@ -112,14 +100,14 @@ class List extends React.Component {
         };
 
         return (
-            <div className="info-manage-page page-wrap" ref="infoManage">
-                <Header colName='infoManage'/>
+            <div className="info-manage-page page-wrap" ref="list">
+                <Header colName='list'/>
                 <div className='info-manage-body page-body'> 
                     <div className='body-left'>
-                        <Navigate colName='infoManage'/>
+                        <Navigate colName='list'/>
                     </div>
                     <div className='body-right'>
-                        <ListFilter colName='infoManage' getTableData={this.getTableData} />
+                        <ListFilter colName='list' getTableData={this.getTableData} />
                         <Table tableConfig={tableConfig} tableFun={tableFun} tableData={tableData} />
                         <Footer />
                     </div>

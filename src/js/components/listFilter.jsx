@@ -80,7 +80,7 @@ class ListFilter extends React.Component {
         var switchLabel = (this.props.pageName || this.props.colName), form;
 
         switch (switchLabel) {
-            case 'infoManage':
+            case 'list':
                 form = (
                     <Form componentClass="fieldset" inline className="list-filter" ref="listFilter">
                         <Button bsStyle="info" onClick={this.doQuery}>全部</Button>
@@ -92,7 +92,7 @@ class ListFilter extends React.Component {
                 );
                 break;
             default:
-                form = 'listFilter';
+                form = null;
                 break;
         }
 
