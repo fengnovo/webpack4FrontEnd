@@ -1,0 +1,9 @@
+.navigate {
+    border-bottom: solid 1px #fff;
+    li {
+        font-size: 14px; border-bottom: solid 1px #dbdbdb;
+        a {border-radius: 0;}
+    }
+
+    & > li + li {margin: 0; border-top: solid 1px #fff;} 
+}
