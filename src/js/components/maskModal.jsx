@@ -42,7 +42,7 @@ class MaskModal extends React.Component {
 
     render() {
         return (
-            <Modal className='mask-model' show={this.state.showModal} onHide={this.close}>
+            <Modal className='mask-model' show={this.props.showModal} onHide={this.close}>
                 <Modal.Header closeButton>
                     <Modal.Title>提示</Modal.Title>
                 </Modal.Header>
@@ -51,7 +51,7 @@ class MaskModal extends React.Component {
                 </Modal.Body>
                 <Modal.Footer>
                     <Button onClick={this.close}>取消</Button>
-                    <Button bsStyle='primary' onClick={this.enter}>确定</Button>
+                    <Button bsStyle='primary' onClick={this.close}>确定</Button>
                 </Modal.Footer>
             </Modal>
         );

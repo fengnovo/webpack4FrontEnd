@@ -27236,7 +27236,7 @@
 	        var _this2 = _possibleConstructorReturn(this, (List.__proto__ || Object.getPrototypeOf(List)).call(this, props));
 
 	        _this2.state = {
-	            showModal: true
+	            showModal: false
 	        };
 	        _this2.option = {
 	            page: 1
@@ -27279,13 +27279,13 @@
 	        value: function getTableData(option) {
 	            var _this = this;
 	            // var url = (option.page == 1 ? '/test/testData.json' : '/test/testData2.json');
-	            var url = 'https://cnodejs.org/api/v1/topics';
+	            var url = 'https://cnodejs.org/api/v1/topics?limit=10';
 	            this.option = option; // listFilter 查询时，缓存查询条件，翻页时用
 
 	            _jquery2.default.getJSON(url, option, function (json, textStatus) {
 	                _this.setState({
 	                    list: json.data,
-	                    total: 40
+	                    total: 10000
 	                });
 	            });
 	        }
@@ -69358,10 +69358,9 @@
 	            list.length > 0 && list.map(function (item, i) {
 	                item.loginname = item.author.loginname;
 	            });
-	            console.log(list);
 	            var tableHeight = window.innerHeight - 40 - 113 - 36 - 75; // 40 header, 113 top, 36 bottom, 75 pagination
 	            tableHeight = Math.min(612, tableHeight); // 612, 20条数据的高度。取二者较小值，用于滚动
-
+	            console.log(tableHeight);
 	            var columns = props.tableConfig.column.map(function (item, i) {
 	                return _react2.default.createElement(
 	                    _reactBootstrapTable.TableHeaderColumn,
@@ -93376,7 +93375,7 @@
 	        value: function render() {
 	            return _react2.default.createElement(
 	                _reactBootstrap.Modal,
-	                { className: 'mask-model', show: this.state.showModal, onHide: this.close },
+	                { className: 'mask-model', show: this.props.showModal, onHide: this.close },
 	                _react2.default.createElement(
 	                    _reactBootstrap.Modal.Header,
 	                    { closeButton: true },
@@ -93405,7 +93404,7 @@
 	                    ),
 	                    _react2.default.createElement(
 	                        _reactBootstrap.Button,
-	                        { bsStyle: 'primary', onClick: this.enter },
+	                        { bsStyle: 'primary', onClick: this.close },
 	                        '确定'
 	                    )
 	                )

@@ -18,7 +18,7 @@ class List extends React.Component {
         super(props);
     
         this.state = {   
-            showModal: true 
+            showModal: false 
         };
         this.option = {
             page: 1
@@ -46,13 +46,13 @@ class List extends React.Component {
     getTableData (option) {
         var _this = this;
         // var url = (option.page == 1 ? '/test/testData.json' : '/test/testData2.json');
-        var url = 'https://cnodejs.org/api/v1/topics';
+        var url = 'https://cnodejs.org/api/v1/topics?limit=10';
         this.option = option;   // listFilter 查询时，缓存查询条件，翻页时用
 
         $.getJSON(url, option, function(json, textStatus) {
             _this.setState({
                 list: json.data,
-                total: 40
+                total: 10000
             })
         });
     }
