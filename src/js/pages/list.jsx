@@ -90,7 +90,7 @@ class List extends React.Component {
                 {"field": "title", "isKey": false, "name": "标题"},
                 {"field": "create_at", "isKey": false, "name": "时间"}
             ],
-            "checkboxMode": true
+            "checkboxMode": false
         };
         // globalConfig.tableConfig.infoTable;
         var tableFun = {

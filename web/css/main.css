@@ -6405,8 +6405,28 @@ textarea, input {
     width: 128px; }
   .list-filter button {
     width: 88px;
-    background-color: #337ab7 !important;
-    border-color: #337ab7 !important; }
+    margin-right: 10px; }
+  .list-filter .btn-select {
+    background: #337ab7;
+    color: #fff; }
+
+.table .dsn {
+  display: none; }
+
+.table .w1 {
+  width: 10%; }
+
+.table .w7 {
+  width: 70%; }
+
+.table .w2 {
+  width: 20%; }
+
+.table .w-5 {
+  width: 5%; }
+
+.table .w1-5 {
+  width: 15%; }
 
 .footer {
   height: 36px;
@@ -6416,7 +6436,7 @@ textarea, input {
 
 .info-manage-page .info-manage-body .react-bs-table-container {
   position: absolute;
-  top: 113px;
+  top: 53px;
   bottom: 36px;
   right: 15px;
   left: 15px; }

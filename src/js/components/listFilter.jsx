@@ -22,10 +22,11 @@ class ListFilter extends React.Component {
             endDate: moment(),
 
 
-            showModal: false
+            showModal: false,
+            btnFlag: [true,false,false,false,false]
         };
 
-        this._bind.apply(this, ['handleEvent', 'doQuery', '_renderForm']);
+        this._bind.apply(this, ['handleEvent', 'handleClick', '_renderForm']);
     }
 
     _bind (...methods) {
@@ -53,17 +54,26 @@ class ListFilter extends React.Component {
         });
     }
 
-    doQuery () {
-        var _this = this;
-        var url = 'https://cnodejs.org/api/v1/topics';
-        this.option = option;   // listFilter 查询时，缓存查询条件，翻页时用
+    handleClick (index) {
+        console.log(index);
+        if(index === undefined){
+            return;
+        }
+        let temArr = [false,false,false,false,false],
+            temStr = ['','good','share','ask','job'];
+        temArr[index] = true;
+        this.setState({
+            btnFlag: temArr
+        });
 
-        $.getJSON(url, option, function(json, textStatus) {
-            _this.setState({
-                list: json.data,
-                total: 40
-            })
-        });;
+        this.props.getTableData({
+            status: 0, //草稿中
+            // beginTime: moment().subtract(29, 'days').unix(),
+            // endTime: moment().unix(),   // unix返回的时间是s，不是ms
+            page: 1,
+            pageSize: globalConfig.pageSize || 20,
+            tab:temStr[index]
+        });
     }
 
 
@@ -83,11 +93,21 @@ class ListFilter extends React.Component {
             case 'list':
                 form = (
                     <Form componentClass="fieldset" inline className="list-filter" ref="listFilter">
-                        <Button bsStyle="info" onClick={this.doQuery}>全部</Button>
-                        <Button bsStyle="info" onClick={this.doQuery}>精华</Button>
-                        <Button bsStyle="info" onClick={this.doQuery}>分享</Button>
-                        <Button bsStyle="info" onClick={this.doQuery}>问答</Button>
-                        <Button bsStyle="info" onClick={this.doQuery}>招聘</Button>
+                        <Button bsStyle="default" 
+                            className={this.state.btnFlag[0] ? "btn-select" : "" } 
+                            onClick={this.handleClick.bind(this,0)}>全部</Button>
+                        <Button bsStyle="default"
+                            className={this.state.btnFlag[1] ? "btn-select" : "" }  
+                            onClick={this.handleClick.bind(this,1)}>精华</Button>
+                        <Button bsStyle="default" 
+                            className={this.state.btnFlag[2] ? "btn-select" : "" } 
+                            onClick={this.handleClick.bind(this,2)}>分享</Button>
+                        <Button bsStyle="default"
+                            className={this.state.btnFlag[3] ? "btn-select" : "" } 
+                            onClick={this.handleClick.bind(this,3)}>问答</Button>
+                        <Button bsStyle="default" 
+                            className={this.state.btnFlag[4] ? "btn-select" : "" } 
+                            onClick={this.handleClick.bind(this,4)}>招聘</Button>
                     </Form>
                 );
                 break;
