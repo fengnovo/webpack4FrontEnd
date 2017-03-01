@@ -29,4 +29,8 @@ $ npm start
 
 Builds a minified version of the application in the dist folder.
 
+  
+## 运行后的截图
+![运行后的截图](pic/1.png) 
+
 
